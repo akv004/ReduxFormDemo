@@ -2,3 +2,15 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.displayName {
+  font-size: 120%;
+  text-align: left;
+  margin-left: 3em;
+}
+
+.displayValue {
+  font-size: 80%;
+  text-align: left;
+  margin-left: 5em;
+}

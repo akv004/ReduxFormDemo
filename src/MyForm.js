@@ -1,6 +1,38 @@
-import React from "react";
-import { Field, FieldArray, reduxForm } from "redux-form";
+import React, { Fragment } from "react";
+import { Field, FieldArray, FormSection, reduxForm } from "redux-form";
 //import validate from "./validate";
+
+export const RenderFacets = (props) => {
+  const { facets } = props;
+
+  return (
+    <Fragment>
+      {facets.map((facet, index) => {
+        return (
+          <div key={index}>
+            <FormSection name={facet.displayName}>
+              <div className="displayName"> {facet.displayName}</div>
+
+              {facet.values.map((value, ind) => (
+                <div key={ind} className="displayValue">
+                  <label htmlFor="employed">{value.name}</label>
+                  <div>
+                    <Field
+                      name={value.name}
+                      id={value.name}
+                      component="input"
+                      type="checkbox"
+                    />
+                  </div>
+                </div>
+              ))}
+            </FormSection>
+          </div>
+        );
+      })}
+    </Fragment>
+  );
+};
 
 const MyForm = (props) => {
   const { handleSubmit, pristine, reset, submitting, data } = props;
@@ -8,9 +40,8 @@ const MyForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {facets.map((facet, index) => (
-        <div>{facet.displayName}</div>
-      ))}
+      <FieldArray name="facets" component={RenderFacets} facets={facets} />
+
       <div>
         <button type="submit" disabled={submitting}>
           Submit

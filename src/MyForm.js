@@ -3,9 +3,14 @@ import { Field, FieldArray, reduxForm } from "redux-form";
 //import validate from "./validate";
 
 const MyForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const { handleSubmit, pristine, reset, submitting, data } = props;
+  const { facets } = data;
+
   return (
     <form onSubmit={handleSubmit}>
+      {facets.map((facet, index) => (
+        <div>{facet.displayName}</div>
+      ))}
       <div>
         <button type="submit" disabled={submitting}>
           Submit
